@@ -1,17 +1,21 @@
 $(function(){
     var currentDate = moment().format("dddd,MMMM Do");
     $("#currentDay").text (currentDate)
+    getLocalStorage()
     colorCode();
-    console.log("random text")
+    
     function colorCode(){
         $(".hour").each(function(){
-            var hour= $(".hour").text();
-            hour= $.trim(hour)
-            hour = hour.slice(0,1)
+            var hour= $(this).text();
+            //console.log("hourHtml="+hour)
+             hour= $.trim(hour)
+           
+           //var  hourDigit = hourT.substring(0,1)
+            //console.log("hourDigit="+hourDigit)
             var currentTime = moment();
             
-            
-            if (hour === "9"){ 
+            //console.log(currentTime.hour())
+            if (hour === "9AM"){ 
                 
                 if(9 === currentTime.hour()){
                     console.log("present");
@@ -26,7 +30,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "10"){ 
+            }else if (hour === "10AM"){ 
                 
                 if(10 === currentTime.hour()){
                     console.log("present");
@@ -41,7 +45,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "11"){ 
+            }else if (hour === "11AM"){ 
                 
                 if(11 === currentTime.hour()){
                     console.log("present");
@@ -56,7 +60,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "12"){ 
+            }else if (hour === "12PM"){ 
                 
                 if(12 === currentTime.hour()){
                     console.log("present");
@@ -71,7 +75,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "1"){ 
+            }else if (hour === "1PM"){ 
                 
                 if(13 === currentTime.hour()){
                     console.log("present");
@@ -86,7 +90,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "2"){ 
+            }else if (hour === "2PM"){ 
                 
                 if(14 === currentTime.hour()){
                     console.log("present");
@@ -101,7 +105,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "3"){ 
+            }else if (hour === "3PM"){ 
                 
                 if(15 === currentTime.hour()){
                     console.log("present");
@@ -116,7 +120,7 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "4"){ 
+            }else if (hour === "4PM"){ 
                 
                 if(16 === currentTime.hour()){
                     console.log("present");
@@ -131,8 +135,8 @@ $(function(){
                     $(this).parent().addClass("row time-block future")
 
                 }
-            }else if (hour === "5"){ 
-                console.log("5")
+            }else if (hour === "5PM"){ 
+                
                 if(17 === currentTime.hour()){
                     console.log("present");
                     $(this).parent().addClass("row time-block present")
@@ -148,6 +152,20 @@ $(function(){
                 }
             }
             
+        })
+    }
+    $(".saveBtn").on("click",function(){
+        var timeBlock= $(this).parent().attr("id");
+        var description= $(this).parent().children("textarea").val()
+        localStorage.setItem(timeBlock, description)
+    })
+    function getLocalStorage(){
+        $(".time-block").each(function(){
+            var id=$(this).attr("id")
+            var description = localStorage.getItem(id)
+            if(description!=null){
+                $(this).children("textarea").val(description)
+            }
         })
     }
 })
