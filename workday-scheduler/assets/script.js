@@ -1,5 +1,5 @@
 $(function(){
-    var currentDate = moment().format("dddd,MMMM Do");
+    var currentDate = moment().format("dddd, MMMM Do");
     $("#currentDay").text (currentDate)
     getLocalStorage()
     colorCode();
